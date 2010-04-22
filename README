@@ -1,6 +1,23 @@
 Westley version 0.01
 ====================
 
+This module alters a Westley XML project from using small video stub files
+to use the original video files.
+
+It creates a workdir of choice, to store all altered project files in.
+
+It rewrites the path of the video files.
+It must know the path pattern to the smaller video (proxy) files
+and the path pattern to the original video files.
+
+For projects that use Westley XML files, new Westley XML files are created
+that point to the original video files. These will be created in the workdir.
+This works recursively for all resources of the project, such as titles,
+still images, etc.
+
+The new project Westley XML file is finally written
+to a file of choice.
+
 
 INSTALLATION
 
@@ -11,7 +28,42 @@ To install this module type the following:
    make test
    make install
 
+
+USAGE
+
+ ./script/parse-project.pl \
+    --project path/to/westley.xml \
+    --workdir /tmp/my-westley-workdir \
+    --small-dir path/to/proxy-video \
+    --orig-dir path/to/original-video
+
+
 DEPENDENCIES
+
+ Some Perl modules...
+
+
+WHERE TO START
+
+Kdenlive is a video editor for Linux that integrates nicely with KDE.
+This application stores its projects in Westley XML.
+
+For this library and scripts to be useful you would be using proxy files
+instead of your original video files.
+
+A reason to use proxy video files is when the original files are
+stored inside a heavy codec, such as h264, and in high resolution.
+Such files are hard to work with on most computers.
+
+
+TROUBLESHOOTING
+
+If the proxy file and original file is not of the same length
+(ie. the same amount of frames), you might see some transition effects
+and cuts to be out of sync with what you was seeing in your editor.
+
+I recommend you open up the altered project file after using this utility to
+check the transition points once more before rendering the final video.
 
 
 COPYRIGHT AND LICENCE
